@@ -126,7 +126,7 @@ MATRIX4D Identity()
 	return I;
 }
 
-MATRIX4D Translation(float dx, float dy, float dz)
+MATRIX4D mTranslation(float dx, float dy, float dz)
 {
 	MATRIX4D T = Identity();
 	T.m31 = dx;
@@ -135,7 +135,7 @@ MATRIX4D Translation(float dx, float dy, float dz)
 	return T;
 }
 
-MATRIX4D RotationX(float theta)
+MATRIX4D mRotationX(float theta)
 {
 	MATRIX4D R = Identity();
 	R.m11 = cosf(theta);
@@ -144,21 +144,21 @@ MATRIX4D RotationX(float theta)
 	R.m12 = -R.m21;
 	return R;
 }
-MATRIX4D RotationY(float theta) {
+MATRIX4D mRotationY(float theta) {
 	MATRIX4D R = Identity();
 	R.m22 = R.m00 = cosf(theta);
 	R.m20 = -sinf(theta);
 	R.m02 = -R.m20;
 	return R;
 }
-MATRIX4D RotationZ(float theta) {
+MATRIX4D mRotationZ(float theta) {
 	MATRIX4D R = Identity();
 	R.m00 = cosf(theta);
 	R.m20 = -sinf(theta);
 	R.m02 = -R.m20;
 	return R;
 }
-MATRIX4D Scaling(float sx, float sy, float sz)
+MATRIX4D mScaling(float sx, float sy, float sz)
 {
 	MATRIX4D S = Zero();
 	S.m00 = sx;

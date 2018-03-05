@@ -34,6 +34,12 @@
     <Filter Include="Source Files\IDVUtils">
       <UniqueIdentifier>{f198db88-758c-4b30-ba84-fa41f3ea3c7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\IDVScene">
+      <UniqueIdentifier>{7960fe74-38d4-473d-aae2-a8e8562abc2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IDVScene">
+      <UniqueIdentifier>{9429c89c-c3e4-4990-bdb6-8c3bbafb582c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\IDVWindow\Win32\IDVWin32Manager.cpp">
@@ -56,6 +62,24 @@
     </ClCompile>
     <ClCompile Include="src\IDVUtils\IDVUtils.cpp">
       <Filter>Source Files\IDVUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IDVScene\IDVD3DQuad.cpp">
+      <Filter>Source Files\IDVScene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IDVScene\IDVGLQuad.cpp">
+      <Filter>Source Files\IDVScene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IDVScene\IDVPrimitiveInstance.cpp">
+      <Filter>Source Files\IDVScene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IDVScene\IDVPrimitiveManager.cpp">
+      <Filter>Source Files\IDVScene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IDVScene\IDVSceneProp.cpp">
+      <Filter>Source Files\IDVScene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IDVScene\IDVGLMesh.cpp">
+      <Filter>Source Files\IDVScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +109,27 @@
     </ClInclude>
     <ClInclude Include="incl\IDVUtils\IDVUtils.h">
       <Filter>Header Files\IDVUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\IDVScene\IDVD3DQuad.h">
+      <Filter>Header Files\IDVScene</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\IDVScene\IDVGLQuad.h">
+      <Filter>Header Files\IDVScene</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\IDVScene\IDVPrimitive.h">
+      <Filter>Header Files\IDVScene</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\IDVScene\IDVPrimitiveInstance.h">
+      <Filter>Header Files\IDVScene</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\IDVScene\idvprimitivemanager.h">
+      <Filter>Header Files\IDVScene</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\IDVScene\IDVSceneProp.h">
+      <Filter>Header Files\IDVScene</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\IDVScene\IDVGLMesh.h">
+      <Filter>Header Files\IDVScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

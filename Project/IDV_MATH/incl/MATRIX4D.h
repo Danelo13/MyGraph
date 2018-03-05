@@ -53,11 +53,11 @@ VECTOR4D operator*(MATRIX4D& M, VECTOR4D& V);
 MATRIX4D operator*(MATRIX4D& M, float X);
 MATRIX4D Zero();
 MATRIX4D Identity();
-MATRIX4D Translation(float dx, float dy, float dz);
-MATRIX4D RotationX(float theta);
-MATRIX4D RotationY(float theta);
-MATRIX4D RotationZ(float theta);
-MATRIX4D Scaling(float sx, float sy, float sz);
+MATRIX4D mTranslation(float dx, float dy, float dz);
+MATRIX4D mRotationX(float theta);
+MATRIX4D mRotationY(float theta);
+MATRIX4D mRotationZ(float theta);
+MATRIX4D mScaling(float sx, float sy, float sz);
 
 float Det3(MATRIX4D& M, int notX, int notY);
 float Det3(MATRIX4D& M);
