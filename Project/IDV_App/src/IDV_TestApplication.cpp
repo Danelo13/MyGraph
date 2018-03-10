@@ -11,6 +11,8 @@ void IDVTestApplication::CreateAssets() {
 
 	PrimitiveMgr = new PrimitiveManager(m_pWindow->m_pVideoDriver->SelectedApi);
 
+	PrimitiveMgr->SetVP(&VP);
+
 	int index = PrimitiveMgr->CreateMesh();
 	MeshInst.CreateInstance(PrimitiveMgr->GetPrimitive(index), &VP);
 
@@ -25,7 +27,7 @@ void IDVTestApplication::CreateAssets() {
 	Proj = FOVLH(0.785398f, 1280.0f / 720.0f, 0.1f, 1000.0f);
 	cout << endl << Proj << endl;
 	cout << endl << View << endl;
-	//	D3DXMatrixOrthoRH(&Proj, 1280.0f / 720.0f, 1.0f , 0.1, 100.0f);
+	
 	VP = View*Proj;
 
 }

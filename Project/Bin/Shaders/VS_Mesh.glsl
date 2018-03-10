@@ -13,5 +13,5 @@ void main(){
 	
 	vecUVCoords = UV;
 	
-	gl_Position = WVP*Vertex;
+	gl_Position = Vertex;
 }

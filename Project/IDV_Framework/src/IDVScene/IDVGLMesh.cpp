@@ -16,7 +16,7 @@ void GLMESH::Create(char * File) {
 
 	g_pBaseDriver->CreateShader(vstr, fstr, SigBase);
 
-	Parseador.Literate(File,Meshes);
+	Meshes = Parseador.Literate(File,Meshes);
 
 
 	for (int i = 0; i < Meshes.size(); i++) {
@@ -46,36 +46,58 @@ void GLMESH::Transform(float *t) {
 
 void GLMESH::Draw(float *t, float *vp) {
 
-	if (t)
-		for (int i = 0; i < 16; i++)
-			transform.v[i] = t[i];
 
 	unsigned int sig = SigBase;
 	sig |= gSig;
 	IDVGLShader * s = dynamic_cast<IDVGLShader*>(g_pBaseDriver->GetShaderSig(sig));
 
+	glUseProgram(s->ShaderProg);
+
+	if (t)
+		for (int i = 0; i < 16; i++)
+			transform.v[i] = t[i];
+
 	MATRIX4D VP;
 	for (int i = 0; i < 16; i++)
 		VP.v[i] = vp[i];
-	MATRIX4D WV = transform*VP;
+	MATRIX4D WVP = transform*VP;
 
-	glUseProgram(s->ShaderProg);
+	glUniformMatrix4fv(s->matWorldUniformLoc, 1, GL_FALSE, t);
+	glUniformMatrix4fv(s->matWorldViewProjUniformLoc, 1, GL_FALSE, &WVP.m[0][0]);
 
-	glUniformMatrix4fv(s->matWorldUniformLoc, 1, GL_FALSE, &transform.m[0][0]);
-	glUniformMatrix4fv(s->matWorldViewProjUniformLoc, 1, GL_FALSE, &transform.m[0][0]);
-	glUniformMatrix4fv(s->matWorldViewUniformLoc, 1, GL_FALSE, &WV.m[0][0]);
+	for (int i = 0; i < Meshes.size(); i++) {
 
-	glBindBuffer(GL_ARRAY_BUFFER, VB);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+		glBindBuffer(GL_ARRAY_BUFFER, Meshes[i]->VB);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, Meshes[i]->IB);
 
-	glEnableVertexAttribArray(s->vertexAttribLoc);
-	glVertexAttribPointer(s->vertexAttribLoc, 4, GL_FLOAT, GL_FALSE, sizeof(Vert), BUFFER_OFFSET(0));
-	glEnableVertexAttribArray(s->uvAttribLoc);
-	glVertexAttribPointer(s->uvAttribLoc, 2, GL_FLOAT, GL_FALSE, sizeof(Vert), BUFFER_OFFSET(16));
+		glEnableVertexAttribArray(s->vertexAttribLoc);
+		glEnableVertexAttribArray(s->normalAttribLoc);
 
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+		if (s->uvAttribLoc != -1)
+			glEnableVertexAttribArray(s->uvAttribLoc);
+
+		glVertexAttribPointer(s->vertexAttribLoc, 4, GL_FLOAT, GL_FALSE, sizeof(Vert), BUFFER_OFFSET(0));
+		glVertexAttribPointer(s->normalAttribLoc, 4, GL_FLOAT, GL_FALSE, sizeof(Vert), BUFFER_OFFSET(16));
+
+		if (s->uvAttribLoc != -1)
+			glVertexAttribPointer(s->uvAttribLoc, 2, GL_FLOAT, GL_FALSE, sizeof(Vert), BUFFER_OFFSET(32));
+
+		glDrawElements(GL_TRIANGLES, Meshes[i]->ind, GL_UNSIGNED_SHORT, 0);
+
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+		glDisableVertexAttribArray(s->vertexAttribLoc);
+		glDisableVertexAttribArray(s->normalAttribLoc);
+
+		if (s->uvAttribLoc != -1) {
+			glDisableVertexAttribArray(s->uvAttribLoc);
+		}
+	}
 }
 
 void GLMESH::Destroy() {
 
 }
+
